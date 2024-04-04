@@ -14,7 +14,6 @@ const Sign = () => {
   const [credCheck, setCredCheck] = useState(null)
   const [showPassword, SetshowPassword] = useState(true)
 
-  console.log(user);
   const validation = () => {
     setCredCheck(null)
     const validEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email.current.value);
