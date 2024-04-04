@@ -8,7 +8,7 @@ function App() {
 
   return (
     <>
-       <img src="https://wallpapers.com/images/high/netflix-background-gs7hjuwvv2g0e9fj.webp" alt=""  className='w-full sm:h-full' />
+       <img src="https://wallpapers.com/images/high/netflix-background-gs7hjuwvv2g0e9fj.webp" alt=""  className='w-full h-full' />
        <Sign />
     </>
   )

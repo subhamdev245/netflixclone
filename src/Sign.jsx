@@ -2,6 +2,9 @@ import React, { useRef, useState } from 'react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { FaRegEye } from "react-icons/fa";
 import { auth } from "../util/firebase"
+import appStore from '../util/appStore';
+import { useSelector } from 'react-redux';
+// import { Subscription } from 'react-redux';
 
 const Sign = () => {
   const [signIn, setSignIn] = useState(false)
@@ -10,6 +13,8 @@ const Sign = () => {
   const [confirmEmail, setConfirmEmail] = useState();
   const [credCheck, setCredCheck] = useState(null)
   const [showPassword, SetshowPassword] = useState(true)
+
+  console.log(user);
   const validation = () => {
     setCredCheck(null)
     const validEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email.current.value);
