@@ -1,19 +1,23 @@
 import React, { useRef, useState } from 'react'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { FaRegEye } from "react-icons/fa";
 import { auth } from "../util/firebase"
 import appStore from '../util/appStore';
 import { useSelector } from 'react-redux';
+import { updateCurrentUser } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
+// import { UseDispatch } from 'react-redux';
+
 // import { Subscription } from 'react-redux';
 
 const Sign = () => {
   const [signIn, setSignIn] = useState(false)
   const email = useRef();
   const [password, setPassword] = useState();
-  const [confirmEmail, setConfirmEmail] = useState();
+  const [names, SetNames] = useState();
   const [credCheck, setCredCheck] = useState(null)
   const [showPassword, SetshowPassword] = useState(true)
-
+  // const nav = useNavigate()
   const validation = () => {
     setCredCheck(null)
     const validEmail = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email.current.value);
@@ -25,31 +29,24 @@ const Sign = () => {
     if (!signIn) {
       createUserWithEmailAndPassword(auth, email.current.value, password).then((userCredential) => {
         const user = userCredential.user;
-        alert("Account Created")
       })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setCredCheck(errorMessage);
-
         });
     }
     if (signIn) {
 
       signInWithEmailAndPassword(auth, email.current.value, password)
         .then((userCredential) => {
-          // Signed in 
           const user = userCredential.user;
-          alert("LOGGED INN");
         })
         .catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message;
           setCredCheck(errorMessage);
         });
-
-
-
     }
 
   }
@@ -58,8 +55,8 @@ const Sign = () => {
       <form className=' w-3/4  mx-auto '>
         <div className='font-extrabold text-2xl font-mono my-5 mx-2 text-center text-white  '>{signIn ? "Sign In" : "New User"}</div>
 
-        {signIn ? "" : <input type="text" placeholder='Enter Your Name' value={confirmEmail} id="" className='w-full p-2 m-2 border-box  text-white border-white border-2 text-center bg-transparent' onChange={(e) => {
-          setConfirmEmail(e.target.value);
+        {signIn ? "" : <input type="text" placeholder='Enter Your Name' value={names} id="" className='w-full p-2 m-2 border-box  text-white border-white border-2 text-center bg-transparent' onChange={(e) => {
+          SetNames(e.target.value);
         }} />}
         <input type="text" placeholder='Email Or Phone Number' ref={email} id="" className='w-full p-2 m-2 border-box  text-white border-white border-2 text-center bg-transparent' />
 
